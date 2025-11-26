@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'org.jetbrains.intellij' version '1.17.4'
+    id("org.jetbrains.intellij.platform") version "2.1.0"
     id 'org.jetbrains.kotlin.jvm' version '2.2.0'
 }
 
@@ -19,14 +19,14 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
     
     intellijPlatform {
-        // 使用本地 Android Studio 安装以避免远程依赖解析问题
-        local("/Users/zhoujiawei/Applications/Android Studio.app")
-        
+        // 使用 2024.3 版本以避免 2025.2.5 的依赖解析问题
+
+        create("IC", "2024.3.2")
         // Add necessary plugin dependencies for compilation here
         bundledPlugin("com.intellij.java")
         bundledPlugin("com.intellij.gradle")
         bundledPlugin("org.jetbrains.kotlin")
-        
+
         // Add instrumentation tools required for build
         instrumentationTools()
     }
@@ -35,56 +35,11 @@ dependencies {
 intellijPlatform {
     pluginConfiguration {
         ideaVersion {
-            sinceBuild = "251"
+            sinceBuild = "243"
+            untilBuild = "252.*"
         }
-
-      /*  changeNotes = """
-            Initial version
-        """.trimIndent()*/
     }
 }
-
-
-// See https://github.com/JetBrains/gradle-intellij-plugin/
-/**
-intellij {
-    // 参数介绍
-    // 本地调试配置：如直接用androidStudio进行调试
-      localPath.set("/Users/zhoujiawei/Applications/Android Studio.app/Contents/") // macOS 示例路径
-
-    // 添加开发需要的依赖插件
-    // 如添加 Android 插件
-    //plugins.set(["org.jetbrains.android"])
-
-    // Targeting Android Studio Build #AI-252.25557.131.2521.14432022
-    // Note: Android Studio builds are often not available in the public Maven repository.
-    // If the build fails with "Cannot resolve Android Studio", please uncomment the 'localPath' line
-    // and point it to your local Android Studio installation.
-    // localPath = '/Applications/Android Studio Preview.app'
-   // version = '2025.2'
-   // type = 'IC'
-   // plugins = [ '/Users/zhoujiawei/Applications/Android Studio.app/Contents/plugins/gradle', '/Users/zhoujiawei/Applications/Android Studio.app/Contents/plugins/Kotlin']
-    updateSinceUntilBuild = false
-}
-**/
-
-
-/*
-compileKotlin {
-    kotlinOptions {
-        jvmTarget = "21"
-        apiVersion = "2.0"
-        languageVersion = "2.0"
-       // freeCompilerArgs = ["-Xuse-k2"]
-    }
-}
-
-compileTestKotlin {
-    kotlinOptions {
-        jvmTarget = "21"
-    }
-}
-*/
 
 
 patchPluginXml {

@@ -15,16 +15,12 @@
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
     </extensions>
-    
-    <!-- Kotlin K2 Mode Support -->
-    <content>
-        <module name="com.dongqing.plugin.findviews"/>
-    </content>
-    
     <depends>org.jetbrains.plugins.gradle</depends>
     <depends>org.jetbrains.android</depends>
     <depends>org.jetbrains.kotlin</depends>
     <depends>com.intellij.modules.java</depends>
+    <!-- <depends>com.intellij.modules.java</depends>
+     <depends>com.intellij.modules.androidstudio</depends> -->
 
      <actions>
          <!-- Add your actions here -->
