@@ -4,7 +4,7 @@
     <vendor email="dong123qing@gmail.com" url="https://github.com/a741762308/FindViews">a741762308</vendor>
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
-    <idea-version since-build="182.0"/>
+    <idea-version since-build="252.*"/>
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
          on how to target different products -->
@@ -15,13 +15,19 @@
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
     </extensions>
+    
+    <!-- Kotlin K2 Mode Support -->
+    <content>
+        <module name="com.dongqing.plugin.findviews"/>
+    </content>
+    
     <depends>org.jetbrains.plugins.gradle</depends>
     <depends>org.jetbrains.android</depends>
     <depends>org.jetbrains.kotlin</depends>
     <depends>com.intellij.modules.java</depends>
 
-    <actions>
-        <!-- Add your actions here -->
+     <actions>
+         <!-- Add your actions here -->
         <action id="findviews" class="com.dairy.findview.FindViewsAction" text="FindViewById"
                 description="find view by id">
             <add-to-group group-id="GenerateGroup" anchor="last"/>

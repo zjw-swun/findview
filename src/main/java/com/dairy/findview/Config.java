@@ -1,6 +1,8 @@
 package com.dairy.findview;
 
+import com.intellij.ide.util.BasePropertyService;
 import com.intellij.ide.util.PropertiesComponent;
+
 
 import static com.dairy.findview.Config.Key.*;
 
@@ -32,11 +34,11 @@ public class Config {
     }
 
     public boolean isButterKnife() {
-        return PropertiesComponent.getInstance().getBoolean(KEY_BUTTER_KNIFE);
+        return PropertiesComponent.getInstance().getBoolean(KEY_BUTTER_KNIFE, false);
     }
 
     public void saveButterKnife(boolean butterKnife) {
-        PropertiesComponent.getInstance().setValue(KEY_BUTTER_KNIFE, butterKnife);
+        PropertiesComponent.getInstance().setValue(KEY_BUTTER_KNIFE, butterKnife, false);
     }
 
     public boolean isButterKnifeBind() {
@@ -44,39 +46,46 @@ public class Config {
     }
 
     public void saveButterKnifeUnBind(boolean butterKnife) {
-        PropertiesComponent.getInstance().setValue(KEY_BUTTER_KNIFE_UNBIND, butterKnife);
+        PropertiesComponent.getInstance().setValue(KEY_BUTTER_KNIFE_UNBIND, butterKnife, false);
     }
 
     public boolean isButterKnifeUnBind() {
-        return PropertiesComponent.getInstance().getBoolean(KEY_BUTTER_KNIFE_UNBIND);
+        return PropertiesComponent.getInstance().getBoolean(KEY_BUTTER_KNIFE_UNBIND, false);
     }
 
     public void saveButterKnifeBind(boolean butterKnife) {
-        PropertiesComponent.getInstance().setValue(KEY_BUTTER_KNIFE_BIND, butterKnife);
+        PropertiesComponent.getInstance().setValue(KEY_BUTTER_KNIFE_BIND, butterKnife, true);
     }
 
     public boolean isButterKnifeR2() {
-        return PropertiesComponent.getInstance().getBoolean(KEY_BUTTER_KNIFE_LIBRARY);
+        return PropertiesComponent.getInstance().getBoolean(KEY_BUTTER_KNIFE_LIBRARY, false);
     }
 
     public void saveButterKnifeLibrary(boolean isR2) {
-        PropertiesComponent.getInstance().setValue(KEY_BUTTER_KNIFE_LIBRARY, isR2);
+        PropertiesComponent.getInstance().setValue(KEY_BUTTER_KNIFE_LIBRARY, isR2, false);
     }
 
     public void saveKotlinLazy(boolean lazy) {
-        PropertiesComponent.getInstance().setValue(KEY_KOTLIN_LAZY, lazy);
+        PropertiesComponent.getInstance().setValue(KEY_KOTLIN_LAZY, lazy, false);
     }
 
     public boolean isKotlinLazy() {
-        return PropertiesComponent.getInstance().getBoolean(KEY_KOTLIN_LAZY);
+        return PropertiesComponent.getInstance().getBoolean(KEY_KOTLIN_LAZY, false);
     }
 
     public void saveModifierType(ModifierType type) {
-        PropertiesComponent.getInstance().setValue(KEY_MODIFIER_TYPE, type.name());
+        PropertiesComponent instance = PropertiesComponent.getInstance();
+        if (instance instanceof BasePropertyService){
+            ((BasePropertyService) instance).setValue(KEY_MODIFIER_TYPE, type.name());
+        }
     }
 
     public String getModifierType() {
-        return PropertiesComponent.getInstance().getValue(KEY_MODIFIER_TYPE, ModifierType.PRIVATE.name());
+        PropertiesComponent instance = PropertiesComponent.getInstance();
+        if (instance instanceof BasePropertyService){
+           return  ((BasePropertyService) instance).getValue(KEY_MODIFIER_TYPE);
+        }
+        return "";
     }
 
     public String getJavaModifier() {
