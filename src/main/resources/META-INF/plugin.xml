@@ -15,6 +15,11 @@
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
     </extensions>
+
+    <extensions defaultExtensionNs="org.jetbrains.kotlin">
+        <supportsKotlinPluginMode supportsK2="true" />
+    </extensions>
+
     <depends>org.jetbrains.plugins.gradle</depends>
     <depends>org.jetbrains.android</depends>
     <depends>org.jetbrains.kotlin</depends>

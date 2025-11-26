@@ -64,3 +64,7 @@ patchPluginXml {
     """
 }
 
+
+tasks.named("runIde") {
+    jvmArgs("-Didea.kotlin.plugin.use.k2=true")
+}
