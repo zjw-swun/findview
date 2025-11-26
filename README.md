@@ -29,6 +29,8 @@ support java and kotlin.The latest version support viewBinding.
  ![xml](/screenshot/xml.gif) 
   
  ## Version Info
+ V5.2 Support K2
+
  V5.1 Merge ButterKnife to ViewBinding
 
  V5.0 Merge findViewById to ViewBinding
