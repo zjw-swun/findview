@@ -5,8 +5,10 @@
 /out
 .externalNativeBuild
 .intellijPlatform
-/.idea
+.idea
 /.gradle
 /captures
 /*.iml
 /build
+.vscode
+.kotlin

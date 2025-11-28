@@ -16,11 +16,11 @@ repositories {
 }
 
 dependencies {
+    //implementation fileTree("/Users/zhoujiawei/Applications/Android Studio.app/Contents/plugins/android")
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
     
     intellijPlatform {
         // 使用 2024.3 版本以避免 2025.2.5 的依赖解析问题
-
         create("IC", "2024.3.2")
         // Add necessary plugin dependencies for compilation here
         bundledPlugin("com.intellij.java")
@@ -28,7 +28,8 @@ dependencies {
         bundledPlugin("org.jetbrains.kotlin")
 
         // Add instrumentation tools required for build
-        instrumentationTools()
+        // Commented out to avoid Microsoft JDK path issues on macOS
+         instrumentationTools()
     }
 }
 
@@ -43,7 +44,7 @@ intellijPlatform {
 
 
 patchPluginXml {
-    sinceBuild = '252'
+    sinceBuild = '243'
     untilBuild = '255.*'
     pluginDescription = """
       1. 【ctrl U】Auto generate findViewById code in activity ,fragment or adapter etc,and support Kotlin or Java.<br>

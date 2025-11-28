@@ -4,7 +4,7 @@
     <vendor email="dong123qing@gmail.com" url="https://github.com/a741762308/FindViews">a741762308</vendor>
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
-    <idea-version since-build="252.*"/>
+    <idea-version since-build="243.*"/>
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
          on how to target different products -->
@@ -20,12 +20,12 @@
         <supportsKotlinPluginMode supportsK2="true" />
     </extensions>
 
-    <depends>org.jetbrains.plugins.gradle</depends>
-    <depends>org.jetbrains.android</depends>
+    <!--  <depends>com.intellij.gradle</depends> -->
+   <!--  <depends>org.jetbrains.android</depends>-->
     <depends>org.jetbrains.kotlin</depends>
+    <depends>com.intellij.gradle</depends>
     <depends>com.intellij.modules.java</depends>
-    <!-- <depends>com.intellij.modules.java</depends>
-     <depends>com.intellij.modules.androidstudio</depends> -->
+    <!-- <depends>com.intellij.modules.androidstudio</depends> -->
 
      <actions>
          <!-- Add your actions here -->
