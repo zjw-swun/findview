@@ -55,9 +55,10 @@ public class ShowDialog extends JDialog {
         mTable.getTableHeader().setDefaultRenderer(headerRenderer);
 
         mTypeComboBox.addItem("aa_bb_cc");
-        mTypeComboBox.addItem("mAaBbCc");
         mTypeComboBox.addItem("aaBbCc");
+        mTypeComboBox.addItem("mAaBbCc");
         mTypeComboBox.setSelectedItem("aaBbCc");
+        onSelectType(resBeanList);
         mTypeComboBox.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
@@ -112,6 +113,13 @@ public class ShowDialog extends JDialog {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+    }
+
+    private void onSelectType(List<ResBean> resBeanList){
+        for (ResBean bean : resBeanList) {
+            bean.setNameType(mTypeComboBox.getSelectedIndex() + 1);
+        }
+        mTableModel.fireTableDataChanged();
     }
 
     private void onOK() {

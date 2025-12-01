@@ -52,9 +52,10 @@ public class MergeDialog extends JDialog {
         table.getTableHeader().setDefaultRenderer(headerRenderer);
 
         typeComboBox.addItem("aa_bb_cc");
-        typeComboBox.addItem("mAaBbCc");
         typeComboBox.addItem("aaBbCc");
+        typeComboBox.addItem("mAaBbCc");
         typeComboBox.setSelectedItem("aaBbCc");
+        onSelectType(resBeanList);
         typeComboBox.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
@@ -66,6 +67,7 @@ public class MergeDialog extends JDialog {
                 tableModel.fireTableDataChanged();
             }
         });
+
 
         kotlinCheckBox.setSelected(Config.get().getFileType() == FileType.KOTLIN);
 
@@ -95,6 +97,13 @@ public class MergeDialog extends JDialog {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+    }
+
+    private void onSelectType(List<ResBean> resBeanList){
+        for (ResBean bean : resBeanList) {
+            bean.setNameType(typeComboBox.getSelectedIndex() + 1);
+        }
+        tableModel.fireTableDataChanged();
     }
 
     private void onOK() {

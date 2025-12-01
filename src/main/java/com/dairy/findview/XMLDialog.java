@@ -63,9 +63,10 @@ public class XMLDialog extends JDialog {
         mTable.getTableHeader().setDefaultRenderer(headerRenderer);
 
         mTypeComboBox.addItem("aa_bb_cc");
-        mTypeComboBox.addItem("mAaBbCc");
         mTypeComboBox.addItem("aaBbCc");
+        mTypeComboBox.addItem("mAaBbCc");
         mTypeComboBox.setSelectedItem("aaBbCc");
+        onSelectType(resBeanList);
         mTypeComboBox.addItemListener(e -> {
             if (e.getStateChange() == ItemEvent.SELECTED) {
                 for (ResBean bean : resBeanList) {
@@ -75,6 +76,7 @@ public class XMLDialog extends JDialog {
             mTableModel.fireTableDataChanged();
             mTextArea.setText(CodeConstant.getGenerateAdapterCode(resBeanList, mKotlinRadioButton.isSelected(), getAdapterName(), xmlPath));
         });
+
 
         RadioChangedListener radioChangedListener = new RadioChangedListener(resBeanList, xmlPath);
         mKotlinRadioButton.addItemListener(radioChangedListener);
@@ -107,6 +109,14 @@ public class XMLDialog extends JDialog {
         // call onCancel() on ESCAPE
         mContentPane.registerKeyboardAction(e -> onCancel(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
+
+    private void onSelectType(List<ResBean> resBeanList){
+        for (ResBean bean : resBeanList) {
+            bean.setNameType(mTypeComboBox.getSelectedIndex() + 1);
+        }
+        mTableModel.fireTableDataChanged();
+    }
+
 
     private class RadioChangedListener implements ItemListener {
         List<ResBean> resBeanList;
@@ -143,7 +153,7 @@ public class XMLDialog extends JDialog {
     }
 
     public String getAdapterName() {
-        if (mNameTextField.getForeground() == JBColor.GRAY || mNameTextField.getText().length() == 0) {
+        if (mNameTextField.getForeground() == JBColor.GRAY || mNameTextField.getText().isEmpty()) {
             return "TestAdapter";
         }
         return mNameTextField.getText();
