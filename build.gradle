@@ -28,8 +28,7 @@ dependencies {
         bundledPlugin("org.jetbrains.kotlin")
 
         // Add instrumentation tools required for build
-        // Commented out to avoid Microsoft JDK path issues on macOS
-         instrumentationTools()
+        instrumentationTools()
     }
 }
 

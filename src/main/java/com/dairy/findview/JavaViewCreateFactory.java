@@ -225,7 +225,6 @@ public class JavaViewCreateFactory extends BaseJavaViewCreateFactory {
                                 return;
                             } else if (statement.getText().contains("setContentView")) {
                                 setContentView = statement;
-                                break;
                             }
                         }
                         if (setContentView != null) {

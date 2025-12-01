@@ -55,9 +55,9 @@ public class ShowDialog extends JDialog {
         mTable.getTableHeader().setDefaultRenderer(headerRenderer);
 
         mTypeComboBox.addItem("aa_bb_cc");
-        mTypeComboBox.addItem("aaBbCc");
         mTypeComboBox.addItem("mAaBbCc");
-        mTypeComboBox.setSelectedItem("mAaBbCc");
+        mTypeComboBox.addItem("aaBbCc");
+        mTypeComboBox.setSelectedItem("aaBbCc");
         mTypeComboBox.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {

@@ -3,7 +3,6 @@ package com.dairy.findview;
 import com.intellij.ide.util.BasePropertyService;
 import com.intellij.ide.util.PropertiesComponent;
 
-
 import static com.dairy.findview.Config.Key.*;
 
 public class Config {
@@ -31,6 +30,7 @@ public class Config {
         public static final String KEY_BUTTER_KNIFE_BIND = "com.dairy.butter_knife_bind";
         public static final String KEY_BUTTER_KNIFE_UNBIND = "com.dairy.butter_knife_unbind";
         public static final String KEY_BUTTER_KNIFE_LIBRARY = "com.dairy.butter_knife_library";
+        public static final String KEY_FORMAT_CODE = "com.dairy.format_code";
     }
 
     public boolean isButterKnife() {
@@ -75,15 +75,15 @@ public class Config {
 
     public void saveModifierType(ModifierType type) {
         PropertiesComponent instance = PropertiesComponent.getInstance();
-        if (instance instanceof BasePropertyService){
+        if (instance instanceof BasePropertyService) {
             ((BasePropertyService) instance).setValue(KEY_MODIFIER_TYPE, type.name());
         }
     }
 
     public String getModifierType() {
         PropertiesComponent instance = PropertiesComponent.getInstance();
-        if (instance instanceof BasePropertyService){
-           return  ((BasePropertyService) instance).getValue(KEY_MODIFIER_TYPE);
+        if (instance instanceof BasePropertyService) {
+            return ((BasePropertyService) instance).getValue(KEY_MODIFIER_TYPE);
         }
         return "";
     }
@@ -137,5 +137,13 @@ public class Config {
 
     public void setClassType(ClassType classType) {
         mClassType = classType;
+    }
+
+    public boolean isFormatCode() {
+        return PropertiesComponent.getInstance().getBoolean(KEY_FORMAT_CODE, false);
+    }
+
+    public void saveFormatCode(boolean formatCode) {
+        PropertiesComponent.getInstance().setValue(KEY_FORMAT_CODE, formatCode, false);
     }
 }

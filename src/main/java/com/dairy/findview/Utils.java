@@ -28,7 +28,7 @@ import java.util.List;
 
 public class Utils {
 
-    private static String[] sActivityClass = new String[]{
+    private static String[] sActivityClass = new String[] {
             "android.app.Activity",
             "android.support.v4.app.SupportActivity",
             "android.support.v7.app.FragmentActivity",
@@ -37,11 +37,11 @@ public class Utils {
             "androidx.fragment.app.FragmentActivity",
             "androidx.appcompat.app.AppCompatActivity"
     };
-    private static String[] sRecyclerAdapterClass = new String[]{
+    private static String[] sRecyclerAdapterClass = new String[] {
             "android.support.v7.widget.RecyclerView.Adapter",
             "androidx.recyclerview.widget.RecyclerView.Adapter"
     };
-    private static String[] sAdapterClass = new String[]{
+    private static String[] sAdapterClass = new String[] {
             "android.widget.BaseAdapter",
             "android.widget.SimpleAdapter",
             "android.widget.ArrayAdapter",
@@ -50,11 +50,10 @@ public class Utils {
             "android.widget.HeaderViewListAdapter"
     };
 
-    private static String[] sRecyclerHolderClass = new String[]{
+    private static String[] sRecyclerHolderClass = new String[] {
             "android.support.v7.widget.RecyclerView.ViewHolder",
             "androidx.recyclerview.widget.RecyclerView.ViewHolder"
     };
-
 
     public static List<ResBean> getResBeanFromFile(PsiFile psiFile, Editor editor) {
         final List<ResBean> resBeans = new ArrayList<>();
@@ -132,13 +131,13 @@ public class Utils {
 
     public static PsiFile getFileFromElement(PsiElement element) {
         if (element != null) {
-            //java
+            // java
             PsiFile file = getFileParent(element, element.getParent());
             if (file != null) {
                 Config.get().setFileType(FileType.JAVA);
                 return file;
             }
-            //kotlin
+            // kotlin
             file = getFileParent(element, element.getParent().getParent());
             if (file != null) {
                 Config.get().setFileType(FileType.KOTLIN);
@@ -184,17 +183,19 @@ public class Utils {
         assert editor != null;
 
         Project project = editor.getProject();
-        if (project == null) return null;
+        if (project == null)
+            return null;
 
         PsiFile psiFile = PsiDocumentManager.getInstance(project).getPsiFile(editor.getDocument());
         if (!(psiFile instanceof KtFile)) {
             return null;
         }
-        //2023.3.2 Location被删除
-//        Location location = Location.fromEditor(editor, project);
-//        PsiElement psiElement = psiFile.findElementAt(location.getStartOffset());
+        // 2023.3.2 Location被删除
+        // Location location = Location.fromEditor(editor, project);
+        // PsiElement psiElement = psiFile.findElementAt(location.getStartOffset());
         PsiElement psiElement = psiFile.findElementAt(editor.getCaretModel().getOffset());
-        if (psiElement == null) return null;
+        if (psiElement == null)
+            return null;
 
         return Utils.getKotlinClass(psiElement);
     }
@@ -252,7 +253,8 @@ public class Utils {
     }
 
     public static boolean isJavaAdapter(@NotNull PsiFile psiFile, @NotNull PsiClass psiClass) {
-        return isJavaFitClass(psiFile, psiClass, sAdapterClass) || isJavaRecyclerAdapter(psiFile, psiClass) || isAdapter(psiClass.getName());
+        return isJavaFitClass(psiFile, psiClass, sAdapterClass) || isJavaRecyclerAdapter(psiFile, psiClass)
+                || isAdapter(psiClass.getName());
     }
 
     public static boolean isJavaRecyclerAdapter(@NotNull PsiFile psiFile, @NotNull PsiClass psiClass) {
@@ -268,7 +270,7 @@ public class Utils {
         for (String classString : classArray) {
             PsiClass activityClass = JavaPsiFacade.getInstance(psiFile.getProject()).findClass(
                     classString, scope);
-            if (activityClass != null && psiClass.isInheritor(activityClass, false)) {
+            if (activityClass != null && psiClass.isInheritor(activityClass, true)) {
                 return true;
             }
         }
@@ -314,7 +316,8 @@ public class Utils {
     public static KtFunction findFunctionByName(@NotNull KtClass ktClass, @NotNull String name) {
         List<KtDeclaration> declarations = ktClass.getDeclarations();
         for (KtDeclaration declaration : declarations) {
-            if (declaration instanceof KtFunction && declaration.getName() != null && declaration.getName().equals(name))
+            if (declaration instanceof KtFunction && declaration.getName() != null
+                    && declaration.getName().equals(name))
                 return (KtFunction) declaration;
         }
         return null;

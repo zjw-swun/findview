@@ -12,7 +12,8 @@ public abstract class BaseJavaViewCreateFactory extends BaseViewCreateFactory {
     protected PsiClass psiClass;
     protected boolean mIsActivity;
 
-    public BaseJavaViewCreateFactory(@NotNull List<ResBean> resIdBeans, @NotNull PsiFile files, @NotNull PsiClass psiClass) {
+    public BaseJavaViewCreateFactory(@NotNull List<ResBean> resIdBeans, @NotNull PsiFile files,
+            @NotNull PsiClass psiClass) {
         super(resIdBeans, files);
         this.psiClass = psiClass;
         mIsActivity = Utils.isJavaActivity(psiFile, psiClass);
@@ -20,8 +21,9 @@ public abstract class BaseJavaViewCreateFactory extends BaseViewCreateFactory {
     }
 
     protected boolean isRecyclerViewAdapter() {
-        return isRecyclerAdapter() || Utils.isJavaRecyclerAdapter(psiFile, psiClass) || psiClass.findMethodsByName("onCreateViewHolder", false).length != 0
-                && psiClass.findMethodsByName("onBindViewHolder", false).length != 0;
+        return isRecyclerAdapter() || Utils.isJavaRecyclerAdapter(psiFile, psiClass)
+                || psiClass.findMethodsByName("onCreateViewHolder", false).length != 0
+                        && psiClass.findMethodsByName("onBindViewHolder", false).length != 0;
     }
 
     protected PsiClass getAdapterHolder(boolean recycler) {
@@ -46,10 +48,15 @@ public abstract class BaseJavaViewCreateFactory extends BaseViewCreateFactory {
      */
     @Override
     protected void formatCode() {
+        // 检查是否启用代码格式化
+        if (!Config.get().isFormatCode()) {
+            return;
+        }
         JavaCodeStyleManager styleManager = JavaCodeStyleManager.getInstance(psiClass.getProject());
         styleManager.optimizeImports(psiClass.getContainingFile());
         styleManager.shortenClassReferences(psiClass);
-        new ReformatCodeProcessor(psiClass.getProject(), psiClass.getContainingFile(), null, false).runWithoutProgress();
+        new ReformatCodeProcessor(psiClass.getProject(), psiClass.getContainingFile(), null, false)
+                .runWithoutProgress();
     }
 
     protected void changeHolderModifier(PsiClass holderClass) {

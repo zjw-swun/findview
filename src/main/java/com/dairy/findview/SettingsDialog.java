@@ -17,6 +17,7 @@ public class SettingsDialog extends JDialog {
     private JRadioButton mRRadioButton;
     private JCheckBox mButterKnifeBind;
     private JCheckBox mButterKnifeUnBind;
+    private JCheckBox mFormatCode;
 
     public SettingsDialog() {
         setPreferredSize(new Dimension(400, 280));
@@ -35,6 +36,7 @@ public class SettingsDialog extends JDialog {
         mButterKnifeBind.setSelected(Config.get().isButterKnifeBind());
         mButterKnifeUnBind.setSelected(Config.get().isButterKnifeUnBind());
         mR2RadioButton.setSelected(Config.get().isButterKnifeR2());
+        mFormatCode.setSelected(Config.get().isFormatCode());
 
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -64,7 +66,6 @@ public class SettingsDialog extends JDialog {
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
-
     private void saveModifierType() {
         ModifierType type;
         switch (mModifierCombox.getSelectedIndex()) {
@@ -89,6 +90,7 @@ public class SettingsDialog extends JDialog {
         saveModifierType();
         saveButterKnife();
         Config.get().saveKotlinLazy(mKotlinLazy.isSelected());
+        Config.get().saveFormatCode(mFormatCode.isSelected());
         // add your code here if necessary
         dispose();
     }

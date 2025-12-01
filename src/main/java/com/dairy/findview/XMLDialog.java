@@ -63,9 +63,9 @@ public class XMLDialog extends JDialog {
         mTable.getTableHeader().setDefaultRenderer(headerRenderer);
 
         mTypeComboBox.addItem("aa_bb_cc");
-        mTypeComboBox.addItem("aaBbCc");
         mTypeComboBox.addItem("mAaBbCc");
-        mTypeComboBox.setSelectedItem("mAaBbCc");
+        mTypeComboBox.addItem("aaBbCc");
+        mTypeComboBox.setSelectedItem("aaBbCc");
         mTypeComboBox.addItemListener(e -> {
             if (e.getStateChange() == ItemEvent.SELECTED) {
                 for (ResBean bean : resBeanList) {

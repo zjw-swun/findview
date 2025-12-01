@@ -68,7 +68,9 @@ public class ResBean {
                 }
                 String word = names[i];
                 sb.append(word.substring(0, 1).toUpperCase())
-                        .append(word.substring(1).toLowerCase());
+                        .append(word.substring(1)
+                               // .toLowerCase()
+                        );
             }
             fieldName = sb.toString();
         } else if (nameType == 2) {
